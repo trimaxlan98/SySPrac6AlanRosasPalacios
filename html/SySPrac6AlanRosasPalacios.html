@@ -1,0 +1,372 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 6: Sistemas diferenciales</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-19"><meta name="DC.source" content="SySPrac6AlanRosasPalacios.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 6: Sistemas diferenciales</h1><!--introduction--><pre>*Enriquez Melendez Jesus
+*Rosas Palacios Alan
+*Irvin Joshep Camacho Dominguez
+*Solano Castrej&oacute;n Eric</pre><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Parametros</a></li><li><a href="#2">Ejercicio 1</a></li><li><a href="#4">Ejercicio 2</a></li><li><a href="#6">Ejercicio 3</a></li><li><a href="#8">Ejercicio 4</a></li><li><a href="#10">Ejercicio 5</a></li><li><a href="#12">Ejercicio 6</a></li><li><a href="#14">Ejercicio 7</a></li></ul></div><h2 id="1">Parametros</h2><pre class="codeinput">syms <span class="string">t</span>
+sympref(<span class="string">'HeavisideAtOrigin'</span>, 1);
+</pre><h2 id="2">Ejercicio 1</h2><p>Muestra la funci&oacute;n de transferencia del sistema</p><p>Codigo: <a href="https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20transferencia2016a">enlace</a></p><pre class="codeinput">transferencia2016a([1 1 1],[1])
+</pre><pre class="codeoutput"> 
+Funcion de transferencia
+ 
+H(s)=
+     1
+----------
+ 2
+s  + s + 1
+
+</pre><h2 id="4">Ejercicio 2</h2><p>Muestra la respuesta al impulso (simb&oacute;lico, gr&aacute;fica)</p><p>Codigo: <a href="https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespImp">enlace</a></p><pre class="codeinput">RespImp([1 1 1],[1],10)
+</pre><pre class="codeoutput"> 
+Aplicamos transformada de laplace
+ 
+                 2
+Y(s) + s Y(s) + s  Y(s)
+
+X(s)
+
+ 
+Usamos los coeficientes de Y(s) y X(s)
+ 
+ 2
+s  + s + 1
+
+=
+1
+
+ 
+Despejamos los coeficientes de Y(s) y obtenemos H(s)
+ 
+H(s)=
+     1
+----------
+ 2
+s  + s + 1
+
+ 
+Hacemos fracciones parciales de H(s)
+ 
+H(s)=
+     1
+----------
+ 2
+s  + s + 1
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es:
+ 
+h(t)=
+           /   t \    / sqrt(3) t \
+sqrt(3) exp| - - | sin| --------- | 2
+           \   2 /    \     2     /
+-------------------------------------
+                  3
+
+</pre><img vspace="5" hspace="5" src="SySPrac6AlanRosasPalacios_01.png" alt=""> <h2 id="6">Ejercicio 3</h2><p>Muestra la respuesta a entrada cero (simb&oacute;lico, gr&aacute;fica)</p><p>Codigo: <a href="https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespEnt0">enlace</a></p><pre class="codeinput">RespEnt0([1 1 1],[1],[1 -1],10)
+</pre><pre class="codeoutput"> 
+Aplicamos transformada de laplace
+ 
+                     2
+Y(s) - s + s Y(s) + s  Y(s)
+
+=
+X(s)
+
+ 
+Sustituimos a X(s) por cero dado que esa es la entrada
+ 
+                     2
+Y(s) - s + s Y(s) + s  Y(s)
+
+=
+0
+
+ 
+Despejamos a Y(s)
+ 
+Y(s)=
+     s
+----------
+ 2
+s  + s + 1
+
+ 
+Hacemos fracciones parciales de Y(s)
+ 
+Y(s)=
+     s
+----------
+ 2
+s  + s + 1
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es:
+ 
+y(t)=
+           /                               / sqrt(3) t \ \
+           |                    sqrt(3) sin| --------- | |
+   /   t \ |    / sqrt(3) t \              \     2     / |
+exp| - - | | cos| --------- | - ------------------------ |
+   \   2 / \    \     2     /               3            /
+
+</pre><img vspace="5" hspace="5" src="SySPrac6AlanRosasPalacios_02.png" alt=""> <h2 id="8">Ejercicio 4</h2><p>Muestra la respuesta a estado cero (simb&oacute;lico, gr&aacute;fica)</p><p>Codigo: <a href="https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespEst0">enlace</a></p><pre class="codeinput">RespEst0([1 1 1],[1],exp(-t)*heaviside(t),10)
+</pre><pre class="codeoutput"> 
+Aplicamos transformada de laplace
+ 
+                 2
+Y(s) + s Y(s) + s  Y(s)
+
+=
+X(s)
+
+ 
+Sustituimos a X(s) por su entrada transformada
+ 
+                 2
+Y(s) + s Y(s) + s  Y(s)
+
+=
+  1
+-----
+s + 1
+
+ 
+Despejamos a Y(s)
+ 
+Y(s)=
+          1
+--------------------
+          2
+(s + 1) (s  + s + 1)
+
+ 
+Hacemos fracciones parciales de Y(s)
+ 
+Y(s)=
+  1          s
+----- - ----------
+s + 1    2
+        s  + s + 1
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es:
+ 
+y(t)=
+                     /                               / sqrt(3) t \ \
+                     |                    sqrt(3) sin| --------- | |
+             /   t \ |    / sqrt(3) t \              \     2     / |
+exp(-t) - exp| - - | | cos| --------- | - ------------------------ |
+             \   2 / \    \     2     /               3            /
+
+</pre><img vspace="5" hspace="5" src="SySPrac6AlanRosasPalacios_03.png" alt=""> <h2 id="10">Ejercicio 5</h2><p>Muestra la respuesta total (simb&oacute;lico, gr&aacute;fica)</p><p>Codigo: <a href="https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespTot">enlace</a></p><pre class="codeinput">RespTot([1 1 1],[1],[1 -1],exp(-t)*heaviside(t),10)
+</pre><pre class="codeoutput"> 
+Aplicamamos transformada de laplace y subtituimos condiciones iniciales
+ 
+                     2
+Y(s) - s + s Y(s) + s  Y(s)
+
+=
+X(s)
+
+ 
+Ponemos a la transformada de la entrada
+ 
+                     2
+Y(s) - s + s Y(s) + s  Y(s)
+
+=
+  1
+-----
+s + 1
+
+ 
+Despejamos a Y(s)
+ 
+Y(s)=
+  1
+-----
+s + 1
+
+ 
+Hacemos fracciones parciales de Y(s)
+ 
+Y(s)=
+  1
+-----
+s + 1
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es
+ 
+y(t)=
+exp(-t)
+
+</pre><img vspace="5" hspace="5" src="SySPrac6AlanRosasPalacios_04.png" alt=""> <h2 id="12">Ejercicio 6</h2><p>La respuesta total al escal&oacute;n con condiciones iniciales 0 (simb&oacute;lico, gr&aacute;fica)</p><p>Codigo: <a href="https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespEst0">enlace</a></p><pre class="codeinput">RespEst0([1 1 1],[1],heaviside(t),10)
+</pre><pre class="codeoutput"> 
+Aplicamos transformada de laplace
+ 
+                 2
+Y(s) + s Y(s) + s  Y(s)
+
+=
+X(s)
+
+ 
+Sustituimos a X(s) por su entrada transformada
+ 
+                 2
+Y(s) + s Y(s) + s  Y(s)
+
+=
+1
+-
+s
+
+ 
+Despejamos a Y(s)
+ 
+Y(s)=
+       1
+--------------
+    2
+s (s  + s + 1)
+
+ 
+Hacemos fracciones parciales de Y(s)
+ 
+Y(s)=
+1      s + 1
+- - ----------
+s    2
+    s  + s + 1
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es:
+ 
+y(t)=
+               /                               / sqrt(3) t \ \
+               |                    sqrt(3) sin| --------- | |
+       /   t \ |    / sqrt(3) t \              \     2     / |
+1 - exp| - - | | cos| --------- | + ------------------------ |
+       \   2 / \    \     2     /               3            /
+
+</pre><img vspace="5" hspace="5" src="SySPrac6AlanRosasPalacios_05.png" alt=""> <h2 id="14">Ejercicio 7</h2><p>Usando subplot, depliega una figura con 5 gr&aacute;ficas</p><p>Codigo: <a href="https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20Plots">enlace</a></p><pre class="codeinput">Plots
+</pre><img vspace="5" hspace="5" src="SySPrac6AlanRosasPalacios_06.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 6: Sistemas diferenciales
+%  *Enriquez Melendez Jesus
+%  *Rosas Palacios Alan
+%  *Irvin Joshep Camacho Dominguez
+%  *Solano Castrejón Eric
+%% Parametros
+syms t
+sympref('HeavisideAtOrigin', 1);
+%% Ejercicio 1
+% Muestra la función de transferencia del sistema
+%
+% Codigo: <https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20transferencia2016a enlace>
+%%
+transferencia2016a([1 1 1],[1])
+%% Ejercicio 2
+% Muestra la respuesta al impulso (simbólico, gráfica)
+%
+% Codigo: <https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespImp enlace>
+%%
+RespImp([1 1 1],[1],10)
+%% Ejercicio 3
+% Muestra la respuesta a entrada cero (simbólico, gráfica)
+%
+% Codigo: <https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespEnt0 enlace>
+%%
+RespEnt0([1 1 1],[1],[1 -1],10)
+%% Ejercicio 4
+% Muestra la respuesta a estado cero (simbólico, gráfica)
+%
+% Codigo: <https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespEst0 enlace>
+%%
+RespEst0([1 1 1],[1],exp(-t)*heaviside(t),10)
+%% Ejercicio 5
+% Muestra la respuesta total (simbólico, gráfica)
+%
+% Codigo: <https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespTot enlace>
+%%
+RespTot([1 1 1],[1],[1 -1],exp(-t)*heaviside(t),10)
+%% Ejercicio 6
+% La respuesta total al escalón con condiciones iniciales 0 (simbólico, gráfica)
+%
+% Codigo: <https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20RespEst0 enlace>
+%%
+RespEst0([1 1 1],[1],heaviside(t),10)
+%% Ejercicio 7
+% Usando subplot, depliega una figura con 5 gráficas
+%
+% Codigo: <https://github.com/trimaxlan98/Se-ales-y-Sistemas/blob/master/function%20Plots enlace>
+%%
+Plots
+##### SOURCE END #####
+--></body></html>
